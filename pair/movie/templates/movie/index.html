@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
 <div class="container">
     <p class="mt-3">
         <i class="bi bi-star-fill text-warning"></i> 리뷰 총 갯수 : {{ total }}개
@@ -18,7 +16,11 @@
             {% for review in reviews %}
             <tr>
                 <td class="text-center">{{ forloop.counter }}</td>
+                {% if review.title == "" %}
+                <td><a href="{% url 'movie:detail' review.pk %}">제목이 없습니다.</a></td>
+                {% else %}
                 <td><a href="{% url 'movie:detail' review.pk %}">{{ review.title }}</a></td>
+                {% endif %}
                 <td class="text-center">{{ review.created_at.date }}</td>
             </tr>
             {% endfor %}
@@ -31,7 +33,4 @@
         </div>
     </div>
 </div>
-
-
-
 {% endblock %}

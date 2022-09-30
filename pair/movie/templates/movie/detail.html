@@ -1,9 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>제목 : {{ review.title }}<h1>
-<p>내용 : {{ review.content }}</p>
-<p>작성 시간 : {{ review.created_at.date }}</p>
-<a href="{% url 'movie:index' %}">목록</a>
-<a href="{% url 'movie:delete' review.pk %}">리뷰 삭제</a>
-<a href="{% url 'movie:edit' review.pk %}">리뷰 수정</a>
+
+<div class="container-fluid">
+  <h1>{{ review.title }}<h1>
+      <hr>
+      <div class="mb-5">작성 시간 : {{ review.created_at.date }}</div>
+      <div>내용</div>
+      <div>{{ review.content }}</div>
+      <a class="btn btn-primary" href="{% url 'movie:index' %}">목록</a>
+      <a class="btn btn-primary" href="{% url 'movie:delete' review.pk %}">리뷰 삭제</a>
+      <!-- <a href="{% url 'movie:edit' review.pk %}">리뷰 수정</a> -->
+      <!-- 리뷰 수정 modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        리뷰 수정
+      </button>
+
+      <!-- Modal -->
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">글 작성 시 입력했던 비밀번호를 입력하세요.</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="{% url 'movie:password_confirm' review.pk %}" method="GET">
+              <div class="modal-body">
+                <label name='password_confirm'>비밀번호 입력</label>
+                <input type="password" class="form-control" name="password_confirm">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <input type="submit" class="btn btn-primary"></a>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+</div>
+
 {% endblock %}
