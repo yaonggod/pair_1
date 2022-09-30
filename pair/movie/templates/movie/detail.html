@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>제목 : {{ review.title }}<h1>
+<p>내용 : {{ review.content }}</p>
+<p>작성 시간 : {{ review.created_at.date }}</p>
+<a href="{% url 'movie:index' %}">목록</a>
+<a href="{% url 'movie:delete' review.pk %}">리뷰 삭제</a>
+<a href="{% url 'movie:edit' review.pk %}">리뷰 수정</a>
+{% endblock %}
