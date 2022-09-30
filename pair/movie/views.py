@@ -49,8 +49,10 @@ def update(request, movie_pk):
     review = Review.objects.get(pk=movie_pk)
     title = request.GET.get('title')
     content = request.GET.get('content')
+    score = request.GET.get('score')
     review.title = title
     review.content = content
+    review.score = score
     review.save()
     return redirect('movie:detail', movie_pk)
 
@@ -70,3 +72,14 @@ def password_confirm(request, movie_pk):
         return redirect('movie:edit', movie_pk)
     else:
         return redirect('movie:detail', movie_pk)
+
+def search_result(request):
+    search = request.GET.get('search')
+    result = []
+    reviews = Review.objects.all()
+    for review in reviews:
+        if search in review.title or search in review.content:
+            result.append(review)
+    total = len(result)
+    context = {'result' : result, 'total' : total}
+    return render(request, 'movie/search_result.html', context)

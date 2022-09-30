@@ -11,4 +11,5 @@ urlpatterns = [
     path('edit/<int:movie_pk>', views.edit, name='edit'),
     path('update/<int:movie_pk>', views.update, name='update'),
     path('password_confirm/<int:movie_pk>', views.password_confirm, name='password_confirm'),
+    path('search_result/', views.search_result, name='search_result'),
 ]

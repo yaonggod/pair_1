@@ -9,6 +9,7 @@
             <tr>
                 <th>리뷰 번호</th>
                 <th>리뷰 제목</th>
+                <th>별점</th>
                 <th>작성 시간</th>
             </tr>
         </thead>
@@ -17,10 +18,34 @@
             <tr>
                 <td class="text-center">{{ forloop.counter }}</td>
                 {% if review.title == "" %}
-                <td><a href="{% url 'movie:detail' review.pk %}">제목이 없습니다.</a></td>
+                <td><a class='text-decoration-none' href="{% url 'movie:detail' review.pk %}">제목이 없습니다.</a></td>
                 {% else %}
-                <td><a href="{% url 'movie:detail' review.pk %}">{{ review.title }}</a></td>
+                <td><a class='text-decoration-none' href="{% url 'movie:detail' review.pk %}">{{ review.title }}</a></td>
                 {% endif %}
+                <td class="text-center">
+                    {% if review.score == 5 %}
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    {% elif review.score == 4 %}
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    {% elif review.score == 3 %}
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    {% elif review.score == 2 %}
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    {% elif review.score == 1 %}
+                    <i class="bi bi-star-fill text-warning"></i>                    
+                    {% endif %}   
+                    
+                </td>
                 <td class="text-center">{{ review.created_at.date }}</td>
             </tr>
             {% endfor %}
